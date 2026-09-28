@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { hasAnyAccount, isLoggedIn } from './data/auth';
+import { isLoggedIn } from './data/auth';
 
 export const authGuard: CanActivateFn = () => {
 
@@ -27,11 +27,6 @@ export const loginGuard: CanActivateFn = () => {
 
   if (isLoggedIn()) {
     router.navigate(['/jobs']);
-    return false;
-  }
-
-  if (!hasAnyAccount()) {
-    router.navigate(['/register']);
     return false;
   }
 

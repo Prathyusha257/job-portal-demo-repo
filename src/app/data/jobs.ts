@@ -282,7 +282,7 @@ export const JOBS: Job[] = [
     title: 'UX Researcher',
     company: 'BrightPath',
     location: 'Remote',
-    type: 'Contract',
+    type: 'Part-time',
     experience: 'Entry level',
     salary: '₹6 LPA - ₹10 LPA',
     minSalary: 6,
