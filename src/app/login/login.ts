@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { login } from '../data/auth';
 
 @Component({
@@ -10,14 +10,24 @@ import { login } from '../data/auth';
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
-export class Login {
+export class Login implements OnInit {
 
   email = '';
   password = '';
 
   errorMessage = '';
+  successMessage = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['registered'] === 'true') {
+        this.successMessage = 'Registration successful! Please log in to access the portal.';
+        this.router.navigate([], { relativeTo: this.route, queryParams: {} });
+      }
+    });
+  }
 
   logIn() {
 

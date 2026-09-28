@@ -102,16 +102,41 @@
 
         <label>Location</label>
 
-    <select
-  [(ngModel)]="selectedLocation"
-  (change)="searchJobs()"
->
-  <option value="Any location">Any location</option>
-  <option value="Bengaluru">Bengaluru</option>
-  <option value="Remote">Remote</option>
-  <option value="London">London</option>
-  <option value="Austin">Austin</option>
-    </select>
+  <label class="checkbox-option">
+    <input
+      type="checkbox"
+      [checked]="selectedLocations.includes('Bengaluru')"
+      (change)="onLocationChange('Bengaluru', $event)"
+    >
+    Bengaluru
+  </label>
+
+  <label class="checkbox-option">
+    <input
+      type="checkbox"
+      [checked]="selectedLocations.includes('Remote')"
+      (change)="onLocationChange('Remote', $event)"
+    >
+    Remote
+  </label>
+
+  <label class="checkbox-option">
+    <input
+      type="checkbox"
+      [checked]="selectedLocations.includes('London')"
+      (change)="onLocationChange('London', $event)"
+    >
+    London
+  </label>
+
+  <label class="checkbox-option">
+    <input
+      type="checkbox"
+      [checked]="selectedLocations.includes('Austin')"
+      (change)="onLocationChange('Austin', $event)"
+    >
+    Austin
+  </label>
 
       </div>
 

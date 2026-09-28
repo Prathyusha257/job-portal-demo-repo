@@ -1,39 +1,40 @@
+<!-- NAVBAR -->
+<nav class="navbar">
+
+  <div class="logo">
+    CareerGrid<span>/</span>
+  </div>
+
+  <div class="nav-links">
+    <a routerLink="/jobs">Discover</a>
+    <a class="active">Saved</a>
+    <a routerLink="/pipeline">Pipeline</a>
+  </div>
+
+  <div class="profile-area">
+
+    <div class="profile-status">
+      <span class="status-dot"></span>
+      Profile {{ profileStrengthPercent }}% complete
+    </div>
+
+    <div class="profile-avatar" routerLink="/profile">
+      {{ initials(profile.name) }}
+    </div>
+
+    <a class="logout-link" (click)="logOut()">Log out</a>
+
+  </div>
+
+</nav>
+
 <div class="saved-page">
-  <!-- NAVBAR -->
-  <nav class="navbar">
-
-    <div class="logo">
-      CareerGrid<span>/</span>
-    </div>
-
-    <div class="nav-links">
-      <a routerLink="/jobs">Discover</a>
-      <a class="active">Saved</a>
-      <a routerLink="/pipeline">Pipeline</a>
-    </div>
-
-    <div class="profile-area">
-
-      <div class="profile-status">
-        <span class="status-dot"></span>
-        Profile {{ profileStrengthPercent }}% complete
-      </div>
-
-      <div class="profile-avatar" routerLink="/profile">
-        {{ initials(profile.name) }}
-      </div>
-
-      <a class="logout-link" (click)="logOut()">Log out</a>
-
-    </div>
-
-  </nav>
-
-  <h1>Saved jobs</h1>
-
-  <p class="saved-subtitle">
-    Jobs you've saved for later.
-  </p>
+  <section class="saved-hero">
+    <h1>Saved jobs</h1>
+    <p class="saved-subtitle">
+      Jobs you've saved for later.
+    </p>
+  </section>
 
   <div
     class="saved-job-card"

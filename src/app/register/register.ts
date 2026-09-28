@@ -49,7 +49,7 @@ export class Register {
       password: this.password
     });
 
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'], { queryParams: { registered: 'true' } });
   }
 
 }

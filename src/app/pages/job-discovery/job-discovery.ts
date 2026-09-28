@@ -21,7 +21,7 @@ export class JobDiscovery {
   constructor(private router: Router) {}
 
   searchText: string = '';
-  selectedLocation: string = 'Any location';
+  selectedLocations: string[] = [];
   selectedJobTypes: string[] = [];
   selectedExperienceLevels: string[] = [];
   selectedSalary: number = 0;
@@ -96,9 +96,10 @@ searchJobs() {
       );
 
     const matchesLocation =
-      this.selectedLocation === 'Any location' ||
-      job.location.trim().toLowerCase() ===
-      this.selectedLocation.trim().toLowerCase();
+      this.selectedLocations.length === 0 ||
+      this.selectedLocations.some(loc =>
+        job.location.trim().toLowerCase() === loc.trim().toLowerCase()
+      );
 
     const matchesJobType =
       this.selectedJobTypes.length === 0 ||
@@ -178,10 +179,26 @@ private sortJobs(jobs: any[]): any[] {
 }
 resetFilters() {
   this.searchText = '';
-  this.selectedLocation = 'Any location';
+  this.selectedLocations = [];
   this.selectedJobTypes = [];
   this.selectedExperienceLevels = [];
   this.selectedSalary = 0;
+
+  this.searchJobs();
+}
+onLocationChange(location: string, event: Event) {
+
+  const checked = (event.target as HTMLInputElement).checked;
+
+  if (checked) {
+    this.selectedLocations = [
+      ...this.selectedLocations,
+      location
+    ];
+  } else {
+    this.selectedLocations =
+      this.selectedLocations.filter(l => l !== location);
+  }
 
   this.searchJobs();
 }

@@ -8,6 +8,10 @@
 
     <h1>Log in to CareerGrid</h1>
 
+    @if (successMessage) {
+      <p class="auth-success">{{ successMessage }}</p>
+    }
+
     <div class="form-group">
       <label>Email</label>
       <input
