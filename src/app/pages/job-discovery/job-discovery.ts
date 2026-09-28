@@ -34,8 +34,10 @@ export class JobDiscovery {
   filteredJobs: any[] = [];
 
   viewMode: 'recommended' | 'all' =
-    (localStorage.getItem('careerGridViewMode') as 'recommended' | 'all') || 'recommended';
+    (localStorage.getItem('careerGridViewMode') as 'recommended' | 'all') || 'all';
   sortBy: 'newest' | 'salary-desc' | 'salary-asc' = 'newest';
+
+  showProfileModal = false;
 
   currentPage = 1;
   pageSize = 5;
@@ -70,6 +72,10 @@ logOut() {
 }
 
 setViewMode(mode: 'recommended' | 'all') {
+  if (mode === 'recommended' && !this.profile.name) {
+    this.showProfileModal = true;
+    return;
+  }
   this.viewMode = mode;
   localStorage.setItem('careerGridViewMode', mode);
   this.searchJobs();
@@ -255,6 +261,15 @@ isSaved(job: any): boolean {
     savedJob => savedJob.title === job.title
   );
 
+}
+
+closeProfileModal() {
+  this.showProfileModal = false;
+}
+
+goToProfile() {
+  this.showProfileModal = false;
+  this.router.navigate(['/profile']);
 }
 
 }

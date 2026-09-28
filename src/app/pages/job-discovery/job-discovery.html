@@ -402,4 +402,23 @@
 
   </section>
 
+  <!-- PROFILE REQUIRED MODAL -->
+  @if (showProfileModal) {
+    <div class="modal-overlay" (click)="closeProfileModal()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <button class="modal-close" (click)="closeProfileModal()">×</button>
+        <h2>Create Your Profile</h2>
+        <p>To access personalized job recommendations based on your skills and experience, please complete your profile first.</p>
+        <div class="modal-actions">
+          <button class="modal-button secondary" (click)="closeProfileModal()">
+            Cancel
+          </button>
+          <button class="modal-button primary" (click)="goToProfile()">
+            Create Profile
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
 </div>
