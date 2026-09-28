@@ -10,7 +10,7 @@
 .saved-hero {
   max-width: 1500px;
   margin: 0 auto;
-  padding: 30px 4% 30px;
+  padding: 30px 48px;
   box-sizing: border-box;
 }
 
@@ -33,7 +33,7 @@
 .saved-page > div {
   max-width: 1500px;
   margin: 0 auto;
-  padding: 0 4%;
+  padding: 0 48px;
   box-sizing: border-box;
 }
 
