@@ -1,15 +1,16 @@
 .saved-page {
   min-height: 100vh;
-  background: #080c10;
-  color: #f5f5f5;
-  padding-bottom: 80px;
+  background: #080b10;
+  color: #e8edf5;
   font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  padding-bottom: 80px;
 }
 
 .saved-hero {
   max-width: 1500px;
   margin: 0 auto;
-  padding: 30px 4%;
+  padding: 30px 4% 30px;
   box-sizing: border-box;
 }
 
@@ -29,7 +30,7 @@
   margin: 0 0 40px;
 }
 
-.saved-page {
+.saved-page > div {
   max-width: 1500px;
   margin: 0 auto;
   padding: 0 4%;

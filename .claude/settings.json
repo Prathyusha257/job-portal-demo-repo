@@ -8,7 +8,8 @@
       "Bash(npx ngh *)",
       "Bash(ng build *)",
       "Bash(dir C:\\\\Projects\\\\Tasks\\\\job-portal)",
-      "PowerShell(Get-ChildItem -Path \"C:\\\\Projects\\\\Tasks\\\\job-portal\\\\src\" -Recurse | Where-Object {$_.Extension -eq \".ts\" -or $_.Extension -eq \".html\"} | Select-Object FullName | Sort-Object -Unique | head -30)"
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Projects\\\\Tasks\\\\job-portal\\\\src\" -Recurse | Where-Object {$_.Extension -eq \".ts\" -or $_.Extension -eq \".html\"} | Select-Object FullName | Sort-Object -Unique | head -30)",
+      "Bash(git commit *)"
     ]
   }
 }
