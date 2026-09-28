@@ -1,0 +1,405 @@
+<div class="job-page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="logo">
+      CareerGrid<span>/</span>
+    </div>
+
+   <div class="nav-links">
+     <a class="active">Discover</a>
+     <a routerLink="/saved-jobs">Saved</a>
+     <a routerLink="/pipeline">Pipeline</a>
+    </div>
+
+    <div class="profile-area">
+
+      <div class="profile-status">
+        <span class="status-dot"></span>
+        Profile {{ profileStrengthPercent }}% complete
+      </div>
+
+    <div class="profile-avatar" routerLink="/profile">
+      {{ initials(profile.name) }}
+    </div>
+
+    <a class="logout-link" (click)="logOut()">Log out</a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <h1>
+      Find work that fits<br>
+      your next chapter.
+    </h1>
+
+    <div class="search-row">
+
+      <div class="search-input">
+
+        <span class="search-icon">⌕</span>
+
+        <input
+          type="text"
+          placeholder="Try “design systems”, “TypeScript” or a company name"
+          [(ngModel)]="searchText"
+          (input)="searchJobs()"
+        />
+
+      </div>
+
+      <div class="role-buttons">
+
+        <button
+          class="role-button"
+          [class.active]="viewMode === 'recommended'"
+          (click)="setViewMode('recommended')"
+        >
+          Recommended
+        </button>
+
+        <button
+          class="role-button"
+          [class.active]="viewMode === 'all'"
+          (click)="setViewMode('all')"
+        >
+          All roles
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- DISCOVERY AREA -->
+  <section class="discovery-content">
+
+
+    <!-- FILTER SIDEBAR -->
+    <aside class="filter-sidebar">
+
+      <div class="filter-header">
+
+        <h2>Filters</h2>
+
+        <button class="reset-button" (click)="resetFilters()">
+          Reset
+        </button>
+
+      </div>
+
+
+      <!-- LOCATION -->
+      <div class="filter-group">
+
+        <label>Location</label>
+
+    <select
+  [(ngModel)]="selectedLocation"
+  (change)="searchJobs()"
+>
+  <option value="Any location">Any location</option>
+  <option value="Bengaluru">Bengaluru</option>
+  <option value="Remote">Remote</option>
+  <option value="London">London</option>
+  <option value="Austin">Austin</option>
+    </select>
+
+      </div>
+
+
+<!-- JOB TYPE -->
+<div class="filter-group">
+
+  <label>Job type</label>
+
+  <label class="checkbox-option">
+    <input
+      type="checkbox"
+      [checked]="selectedJobTypes.includes('Full-time')"
+      (change)="onJobTypeChange('Full-time', $event)"
+    >
+    Full-time
+  </label>
+
+  <label class="checkbox-option">
+    <input
+      type="checkbox"
+      [checked]="selectedJobTypes.includes('Part-time')"
+      (change)="onJobTypeChange('Part-time', $event)"
+    >
+    Part-time
+  </label>
+
+  <label class="checkbox-option">
+    <input
+      type="checkbox"
+      [checked]="selectedJobTypes.includes('Contract')"
+      (change)="onJobTypeChange('Contract', $event)"
+    >
+    Contract
+  </label>
+
+  <label class="checkbox-option">
+    <input
+      type="checkbox"
+      [checked]="selectedJobTypes.includes('Internship')"
+      (change)="onJobTypeChange('Internship', $event)"
+    >
+    Internship
+  </label>
+
+</div>
+
+
+<!-- EXPERIENCE -->
+<div class="filter-group">
+
+  <label>Experience level</label>
+
+  <label class="checkbox-option">
+    <input
+      type="checkbox"
+      [checked]="selectedExperienceLevels.includes('Entry level')"
+      (change)="onExperienceChange('Entry level', $event)"
+    >
+    Entry level
+  </label>
+
+  <label class="checkbox-option">
+    <input
+      type="checkbox"
+      [checked]="selectedExperienceLevels.includes('Mid level')"
+      (change)="onExperienceChange('Mid level', $event)"
+    >
+    Mid level
+  </label>
+
+  <label class="checkbox-option">
+    <input
+      type="checkbox"
+      [checked]="selectedExperienceLevels.includes('Senior level')"
+      (change)="onExperienceChange('Senior level', $event)"
+    >
+    Senior level
+  </label>
+
+</div>
+
+
+      <!-- SALARY -->
+      <div class="filter-group">
+
+        <label>Minimum salary</label>
+
+       <input 
+         type="range" 
+          min="0" 
+          max="30" 
+          [value]="selectedSalary"
+          (input)="onSalaryChange($event)"
+          class="salary-range"
+        >
+
+    <div class="salary-values"> 
+     <span>₹{{ selectedSalary }} LPA</span> 
+     <span>₹30 LPA</span> 
+    </div>
+
+      </div>
+
+    </aside>
+
+
+    <!-- JOB RESULTS -->
+    <main class="job-results">
+
+
+      <!-- RESULTS HEADER -->
+      <div class="results-header">
+
+        <div>
+
+    <div class="results-title">
+      <h2>{{ viewMode === 'recommended' ? 'Recommended for you' : 'All roles' }}</h2>
+      <span>{{ allViewJobs.length }} roles</span>
+    </div>
+
+    @if (viewMode === 'recommended') {
+      <p>Based on your profile and skills.</p>
+    }
+
+        </div>
+
+
+        @if (viewMode === 'all') {
+          <div class="sort-control">
+
+            <label>Sort</label>
+
+            <select
+              [(ngModel)]="sortBy"
+              (change)="searchJobs()"
+            >
+              <option value="newest">Newest</option>
+              <option value="salary-desc">Salary: High to Low</option>
+              <option value="salary-asc">Salary: Low to High</option>
+            </select>
+
+          </div>
+        }
+
+      </div>
+
+
+      <!-- JOB CARDS -->
+    <div
+      class="modern-job-card"
+      *ngFor="let job of filteredJobs"
+    >
+
+        <!-- COMPANY ICON -->
+        <div class="company-icon">
+          {{ job.company.charAt(0) }}
+        </div>
+
+
+        <!-- JOB INFORMATION -->
+        <div class="modern-job-info">
+
+          <div class="modern-job-top">
+
+            <div>
+
+              <span
+                class="new-label"
+                *ngIf="job.posted === '2 days ago'"
+              >
+                NEW
+              </span>
+
+              <h3>
+                {{ job.title }}
+              </h3>
+
+              <p class="modern-company">
+                {{ job.company }} · {{ job.location }}
+              </p>
+
+            </div>
+
+
+      <button
+        class="heart-button"
+        (click)="toggleSave(job)"
+      >
+        {{ isSaved(job) ? '♥' : '♡' }}
+      </button>
+
+          </div>
+
+
+          <!-- JOB META -->
+          <div class="modern-job-meta">
+
+            <span>
+              {{ job.type }}
+            </span>
+
+            <span>
+              {{ job.salary }}
+            </span>
+
+            <span>
+              {{ job.posted }}
+            </span>
+
+          </div>
+
+
+          <!-- SKILLS -->
+          <div class="modern-skills">
+
+            <span *ngFor="let skill of job.skills">
+              {{ skill }}
+            </span>
+
+          </div>
+
+
+          <!-- MATCH -->
+          <div class="match-row">
+
+            <span class="match-score">
+               {{ getProfileMatch(job) }}% match
+            </span>
+
+        <button
+           class="view-button"
+           [routerLink]="['/job-details', job.id]"
+        >
+          View job
+        </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- NO RESULTS -->
+      <div
+        *ngIf="allViewJobs.length === 0"
+        class="no-results"
+      >
+        No jobs found matching "{{ searchText }}"
+      </div>
+
+
+      <!-- PAGINATION -->
+      @if (viewMode === 'all' && totalPages > 1) {
+        <div class="pagination">
+
+          <button
+            class="page-button"
+            [disabled]="currentPage === 1"
+            (click)="goToPage(currentPage - 1)"
+          >
+            Prev
+          </button>
+
+          @for (page of pageNumbers; track page) {
+            <button
+              class="page-button"
+              [class.active]="page === currentPage"
+              (click)="goToPage(page)"
+            >
+              {{ page }}
+            </button>
+          }
+
+          <button
+            class="page-button"
+            [disabled]="currentPage === totalPages"
+            (click)="goToPage(currentPage + 1)"
+          >
+            Next
+          </button>
+
+        </div>
+      }
+
+    </main>
+
+  </section>
+
+</div>

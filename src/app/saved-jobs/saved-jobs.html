@@ -1,0 +1,98 @@
+<div class="saved-page">
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="logo">
+      CareerGrid<span>/</span>
+    </div>
+
+    <div class="nav-links">
+      <a routerLink="/jobs">Discover</a>
+      <a class="active">Saved</a>
+      <a routerLink="/pipeline">Pipeline</a>
+    </div>
+
+    <div class="profile-area">
+
+      <div class="profile-status">
+        <span class="status-dot"></span>
+        Profile {{ profileStrengthPercent }}% complete
+      </div>
+
+      <div class="profile-avatar" routerLink="/profile">
+        {{ initials(profile.name) }}
+      </div>
+
+      <a class="logout-link" (click)="logOut()">Log out</a>
+
+    </div>
+
+  </nav>
+
+  <h1>Saved jobs</h1>
+
+  <p class="saved-subtitle">
+    Jobs you've saved for later.
+  </p>
+
+  <div
+    class="saved-job-card"
+    *ngFor="let job of savedJobs"
+  >
+
+    <div class="company-icon">
+      {{ job.company.charAt(0) }}
+    </div>
+
+    <div class="job-info">
+
+      <h2>{{ job.title }}</h2>
+
+      <p>
+        {{ job.company }} · {{ job.location }}
+      </p>
+
+      <div class="job-meta">
+        <span>{{ job.type }}</span>
+        <span>{{ job.salary }}</span>
+        <span>{{ job.posted }}</span>
+      </div>
+
+      <div class="skills">
+        <span *ngFor="let skill of job.skills">
+          {{ skill }}
+        </span>
+      </div>
+
+    </div>
+
+    <div class="job-actions">
+
+      <button
+        class="view-button"
+        [routerLink]="['/job-details', job.id]"
+      >
+        View job
+      </button>
+
+      <button
+        class="remove-button"
+        (click)="removeJob(job)"
+      >
+        ♡
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div
+    *ngIf="savedJobs.length === 0"
+    class="empty-state"
+  >
+    <h2>No saved jobs yet</h2>
+    <p>Jobs you save will appear here.</p>
+  </div>
+
+</div>

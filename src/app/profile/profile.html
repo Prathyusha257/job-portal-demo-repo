@@ -1,0 +1,183 @@
+<div class="profile-page">
+
+  <a
+    class="back-link"
+    routerLink="/jobs"
+  >
+    ← Back to Discover
+  </a>
+
+  <h1>Build your profile</h1>
+
+  <p class="profile-subtitle">
+    Tell us about yourself so we can find jobs that fit you.
+  </p>
+
+  <div class="account-summary">
+
+    <div class="account-avatar">
+      {{ initials(profile.name) }}
+    </div>
+
+    <div>
+      <p class="account-name">{{ profile.name }}</p>
+      <p class="account-email">{{ profile.email }}</p>
+    </div>
+
+  </div>
+
+  <div class="profile-completion">
+    <span>Profile completion: <span class="completion-percent">{{ profileStrengthPercent }}%</span></span>
+  </div>
+
+  <div class="completion-bar">
+    <div
+      class="completion-fill"
+      [style.width.%]="profileStrengthPercent"
+    ></div>
+  </div>
+
+  <p class="completion-hint">
+    Complete your profile to get better job recommendations.
+  </p>
+
+  <div class="profile-form">
+
+    <!-- LOCATION -->
+    <section class="profile-section">
+
+      <h2>Location</h2>
+
+      <div class="form-group">
+        <label>Location</label>
+        <input
+          type="text"
+          placeholder="e.g. Bengaluru"
+          [(ngModel)]="profile.location"
+        >
+      </div>
+
+    </section>
+
+
+    <!-- PROFESSIONAL INFORMATION -->
+    <section class="profile-section">
+
+      <h2>Professional information</h2>
+
+      <div class="form-group">
+        <label>Skills</label>
+        <input
+          type="text"
+          placeholder="e.g. Java, Python, SQL, React"
+          [(ngModel)]="profile.skills"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Experience level</label>
+
+        <select [(ngModel)]="profile.experience">
+          <option value="" disabled>Select experience level</option>
+          <option>Entry level</option>
+          <option>Mid level</option>
+          <option>Senior level</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Work history</label>
+
+        <input
+          type="text"
+          placeholder="e.g. Data Analyst at Ipsos"
+          [(ngModel)]="profile.workHistory"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Resume</label>
+
+        <input
+          type="file"
+          accept=".pdf,.doc,.docx"
+          (change)="onResumeSelected($event)"
+        >
+
+        @if (profile.resumeName) {
+          <span>
+            {{ profile.resumeName }}
+          </span>
+        }
+      </div>
+
+    </section>
+
+
+    <!-- JOB PREFERENCES -->
+    <section class="profile-section">
+
+      <h2>Job preferences</h2>
+
+      <div class="form-group">
+
+        <label>Preferred job type</label>
+
+        <select [(ngModel)]="profile.jobType">
+          <option value="" disabled>Select job type</option>
+          <option>Full-time</option>
+          <option>Part-time</option>
+          <option>Contract</option>
+          <option>Internship</option>
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Minimum salary</label>
+
+        <select [(ngModel)]="profile.salary">
+          <option value="" disabled>Select minimum salary</option>
+          <option>₹5 LPA</option>
+          <option>₹8 LPA</option>
+          <option>₹10 LPA</option>
+          <option>₹12 LPA</option>
+          <option>₹15 LPA</option>
+          <option>₹20 LPA</option>
+        </select>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Work preference</label>
+
+        <select [(ngModel)]="profile.workPreference">
+          <option value="" disabled>Select work preference</option>
+          <option>Remote</option>
+          <option>On-site</option>
+          <option>Hybrid</option>
+        </select>
+
+      </div>
+
+    </section>
+
+
+    <button
+      class="save-profile-button"
+      (click)="saveProfile()"
+    >
+      Save profile
+    </button>
+
+    @if (showSaveSuccess) {
+      <p class="save-success-message">
+        Profile saved successfully
+      </p>
+    }
+
+  </div>
+
+</div>

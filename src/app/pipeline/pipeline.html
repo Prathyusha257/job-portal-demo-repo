@@ -1,0 +1,154 @@
+<div class="pipeline-page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="logo">
+      CareerGrid<span>/</span>
+    </div>
+
+    <div class="nav-links">
+      <a routerLink="/jobs">Discover</a>
+      <a routerLink="/saved-jobs">Saved</a>
+      <a class="active">Pipeline</a>
+    </div>
+
+    <div class="profile-area">
+
+      <div class="profile-status">
+        <span class="status-dot"></span>
+        Profile {{ profileStrengthPercent }}% complete
+      </div>
+
+      <div class="profile-avatar" routerLink="/profile">
+        {{ initials(profile.name) }}
+      </div>
+
+      <a class="logout-link" (click)="logOut()">Log out</a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- HEADER -->
+  <header class="pipeline-header">
+
+    <h1>Your pipeline</h1>
+
+    <p class="pipeline-subtitle">
+      {{ totalApplications }} active applications · {{ savedJobs.length }} saved roles
+    </p>
+
+  </header>
+
+
+  <!-- BOARD -->
+  <section class="pipeline-board">
+
+    <div class="pipeline-column" *ngFor="let stage of pipelineStages">
+
+      <div class="column-header">
+        <span class="column-title">{{ stage.label }}</span>
+        <span class="column-count">{{ stage.applications.length }}</span>
+      </div>
+
+      <div class="pipeline-card" *ngFor="let application of stage.applications">
+
+        <div class="card-avatar">
+          {{ initials(application.company) }}
+        </div>
+
+        <h3>{{ application.title }}</h3>
+
+        <p class="card-company">{{ application.company }}</p>
+
+        <div class="progress-track">
+          <span
+            class="progress-segment"
+            *ngFor="let segment of [1, 2, 3, 4]"
+            [class.filled]="segment <= application.progress"
+          ></span>
+        </div>
+
+        <p class="card-updated">{{ application.updated }}</p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- BOTTOM -->
+  <section class="pipeline-bottom">
+
+    <!-- RECOMMENDED -->
+    <div class="recommended-panel">
+
+      <h2>Recommended for you</h2>
+
+      <div
+        class="recommended-row"
+        *ngFor="let job of recommendedJobs"
+      >
+
+        <div class="card-avatar">
+          {{ initials(job.company) }}
+        </div>
+
+        <div class="recommended-info">
+          <h3>{{ job.title }}</h3>
+          <p>{{ job.company }} · {{ job.salary }}</p>
+        </div>
+
+        <span class="match-percent">{{ job.match }}%</span>
+
+        <button
+          class="save-button"
+          [class.saved]="isSaved(job)"
+          (click)="toggleSave(job)"
+        >
+          {{ isSaved(job) ? 'Saved' : 'Save' }}
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- PROFILE STRENGTH -->
+    <aside class="strength-panel">
+
+      <h2>Profile strength</h2>
+
+      <div class="strength-top">
+        <span>{{ profileStrengthPercent }}% complete</span>
+        <span class="strength-percent">{{ profileStrengthPercent }}%</span>
+      </div>
+
+      <div class="strength-bar">
+        <div
+          class="strength-fill"
+          [style.width.%]="profileStrengthPercent"
+        ></div>
+      </div>
+
+      <div
+        class="checklist-item"
+        *ngFor="let item of profileChecklist"
+      >
+        <span>{{ item.label }}</span>
+        <a
+          routerLink="/profile"
+          [class.done]="item.done"
+        >
+          {{ item.done ? 'Done' : 'Add' }}
+        </a>
+      </div>
+
+    </aside>
+
+  </section>
+
+</div>

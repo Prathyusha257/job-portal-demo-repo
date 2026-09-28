@@ -1,0 +1,287 @@
+<div class="job-details-page">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a routerLink="/jobs">Discover</a>
+    <span>/</span>
+    <span>{{ job?.title }}</span>
+  </div>
+
+
+  <!-- JOB HEADER -->
+  <section class="job-header">
+
+<div class="company-logo">
+  {{ job?.company?.charAt(0) }}
+</div>
+
+    <div class="job-title-section">
+
+      <h1>{{ job?.title }}</h1>
+
+    <p class="company-name">
+        {{ job?.company }} · {{ job?.location }} · {{ job?.type }}
+    </p>
+
+      <div class="job-meta">
+
+        <strong>{{ job?.salary }}</strong>
+
+        <span>·</span>
+
+        <span>Posted {{ job?.posted }}</span>
+
+        <span>·</span>
+
+       <span class="match">{{ matchPercent }}% match</span>
+
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <button
+        class="save-button"
+        [class.saved]="isSaved()"
+        (click)="toggleSave()"
+      >
+        {{ isSaved() ? '♥ Saved' : '♡ Save role' }}
+      </button>
+
+    <button class="apply-button" (click)="startApplication()">
+      Apply now
+    </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- MAIN CONTENT -->
+  <div class="job-content">
+
+
+    <!-- LEFT SIDE -->
+    <main class="job-main">
+
+
+      <!-- ABOUT -->
+      <section class="job-section">
+
+        <h2>About the role</h2>
+
+    <p>
+       {{ job?.about }}
+    </p>
+
+    <div class="skills">
+
+      <span *ngFor="let skill of job?.skills">
+        {{ skill }}
+      </span>
+
+    </div>
+
+      </section>
+
+
+      <!-- WHAT YOU'LL DO -->
+<section class="job-section">
+
+  <h2>What you'll do</h2>
+
+  <ul>
+    <li *ngFor="let item of job?.responsibilities">
+      {{ item }}
+    </li>
+  </ul>
+
+</section>
+
+
+      <!-- WHAT WE'RE LOOKING FOR -->
+      <section class="job-section">
+
+        <h2>What we're looking for</h2>
+
+    <ul>
+     <li *ngFor="let item of job?.requirements">
+        {{ item }}
+     </li>
+    </ul>
+
+      </section>
+
+
+      <!-- BENEFITS -->
+      <section class="job-section">
+
+        <h2>Benefits</h2>
+
+<div class="benefits">
+
+  <div
+    class="benefit"
+    *ngFor="let benefit of job?.benefits"
+  >
+    {{ benefit }}
+  </div>
+
+</div>
+
+      </section>
+
+
+      <!-- ABOUT COMPANY -->
+      <section class="job-section company-section">
+
+        <h2>About {{ job?.company }}</h2>
+
+    <p>
+        {{ job?.companyDescription }}
+    </p>
+
+      </section>
+
+
+    </main>
+
+
+<!-- RIGHT APPLICATION PANEL -->
+<aside class="application-card">
+
+  <h2>Apply in three steps</h2>
+
+  <!-- STEPS -->
+  <div class="application-steps">
+
+    <div class="step" [class.active]="currentStep >= 1">
+      <span>1</span>
+    </div>
+
+    <div class="step-line"></div>
+
+    <div class="step" [class.active]="currentStep >= 2">
+      <span>2</span>
+    </div>
+
+    <div class="step-line"></div>
+
+    <div class="step" [class.active]="currentStep >= 3">
+      <span>3</span>
+    </div>
+
+  </div>
+
+
+  <!-- STEP 1 -->
+  <div *ngIf="currentStep === 1">
+
+    <p class="step-title">
+      YOUR DETAILS
+    </p>
+
+    <div class="application-form">
+
+      <label>Full name</label>
+
+      <input
+        type="text"
+        placeholder="Enter your name"
+        [(ngModel)]="fullName"
+      >
+
+      <label>Email</label>
+
+      <input
+        type="email"
+        placeholder="Enter your email"
+        [(ngModel)]="email"
+      >
+
+      <button
+        class="continue-button"
+        (click)="nextStep()">
+        Continue
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- STEP 2 -->
+  <div *ngIf="currentStep === 2">
+
+    <p class="step-title">
+      RESUME
+    </p>
+
+    <div class="application-form">
+
+      <label>Upload your resume</label>
+
+      <input
+        type="file"
+        accept=".pdf,.doc,.docx"
+      >
+
+      <button
+        class="continue-button"
+        (click)="nextStep()">
+        Continue
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- STEP 3 -->
+  <div *ngIf="currentStep === 3">
+
+    <p class="step-title">
+      REVIEW
+    </p>
+
+    <div class="application-form">
+
+      <p>
+        Your application is ready to be submitted.
+      </p>
+
+    <button
+       class="continue-button"
+       (click)="submitApplication()">
+       Submit Application
+    </button>
+
+    </div>
+
+  </div>
+
+   <!-- APPLICATION SUBMITTED -->
+<div *ngIf="currentStep === 4">
+
+  <p class="step-title">
+    APPLICATION SUBMITTED
+  </p>
+
+  <div class="application-form">
+
+    <p>
+      Your application has been submitted successfully.
+    </p>
+
+  </div>
+
+</div>
+
+</aside>
+
+
+  </div>
+
+</div>

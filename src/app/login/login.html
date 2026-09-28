@@ -1,0 +1,47 @@
+<div class="auth-page">
+
+  <div class="auth-card">
+
+    <div class="auth-logo">
+      CareerGrid<span>/</span>
+    </div>
+
+    <h1>Log in to CareerGrid</h1>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        type="email"
+        placeholder="you@example.com"
+        [(ngModel)]="email"
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input
+        type="password"
+        placeholder="Enter your password"
+        [(ngModel)]="password"
+      >
+    </div>
+
+    @if (errorMessage) {
+      <p class="auth-error">{{ errorMessage }}</p>
+    }
+
+    <button
+      class="auth-button"
+      (click)="logIn()"
+    >
+      Log in
+    </button>
+
+    <p class="auth-switch">
+      Don't have an account?
+      <a routerLink="/register">Create one</a>
+    </p>
+
+  </div>
+
+</div>
