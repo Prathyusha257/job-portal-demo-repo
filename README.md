@@ -1,59 +1,54 @@
-# JobPortal
+# JobPortal (CareerGrid)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.0.
+A job-discovery demo app I built while exploring frontend design and UX. It's a small "CareerGrid" style product: register/login, browse jobs, view job details, save jobs, and track applications through a simple pipeline — all running entirely in the browser. The focus was less on backend logic and more on making the product look and feel polished and easy to use.
 
-## Development server
+## Which journey I chose and why
 
-To start a local development server, run:
+I picked the job portal / job-discovery journey (register → login → browse jobs → view details → save/apply → track pipeline) because it gives a realistic reason to design several different screen types — auth forms, a browsable list, a detail page, and a dashboard-style tracker — in one connected product. That variety let me practice visual design and UX flow across different contexts instead of just one screen.
 
-```bash
-ng serve
-```
+## Key Design Decisions
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Visual Impact:** A single dark theme with one lime-green accent used sparingly for highlights gives the app a modern, focused look instead of a generic admin-panel feel.
+- **Creative Problem Solving:** A profile-based match % and a kanban-style pipeline board turn plain job data into features that feel like a real product.
+- **Attention to Detail:** Consistent spacing, rounded corners, and border colors across inputs, and the navbar.
+- **Intuitive Navigation:** A simple navbar plus login/logout redirects make sure users always land on the right page.
+- **Mobile Experience:** Every main page reflows into a single column on smaller screens so it still works well on mobile.
 
-## Code scaffolding
+## Technologies Used
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Angular
+- TypeScript
+- HTML
+- CSS
+- Local Storage
+- Git & GitHub
+- VS Code
 
-```bash
-ng generate component component-name
-```
+## Setup Instructions
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Prerequisites: Node.js `^22.22.3`, `^24.15.0`, or `>=26.0.0`, and npm.
 
 ```bash
-ng build
+npm install
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`.
 
-## Running unit tests
+There's no backend to configure — everything runs client-side against mock data and `localStorage`.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## What I Would Improve With More Time
 
-```bash
-ng test
-```
+- Replace `localStorage` with a real backend so accounts and saved jobs aren't just a local demo trick — needed before this could be a real product.
+- Micro-interactions and transitions (button hover/press states, page transitions, loading skeletons) to make the app feel more alive instead of static.
+- Empty and error states — right now the UI assumes happy-path data; no designed "no saved jobs yet" or "search returned nothing" screens.
+- Accessibility pass — ARIA labels, keyboard navigation, and visible focus states, especially on the pipeline board and save/apply actions.
 
-## Running end-to-end tests
+## Screenshots
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Login
+- Profile
+- Job Discovery
+- Job Details
+- Pipeline
+- Saved Jobs
