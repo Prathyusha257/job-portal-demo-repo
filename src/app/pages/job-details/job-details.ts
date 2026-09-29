@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { JOBS, getProfileMatch } from '../../data/jobs';
-import { getCurrentEmail } from '../../data/auth';
+import { getCurrentEmail, logout } from '../../data/auth';
 import { getProfile } from '../../data/profile-store';
 import { getSavedJobs, setSavedJobs } from '../../data/saved-jobs-store';
+import { getInitials } from '../../data/initials';
+import { getProfileStrengthPercent } from '../../data/profile';
 
 @Component({
   selector: 'app-job-details',
@@ -26,7 +28,7 @@ export class JobDetails implements OnInit {
   fullName: string = '';
   email: string = '';
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
 
@@ -50,6 +52,19 @@ export class JobDetails implements OnInit {
     }
 
     return getProfileMatch(this.job, this.profile);
+  }
+
+  initials(name: string): string {
+    return getInitials(name);
+  }
+
+  get profileStrengthPercent(): number {
+    return getProfileStrengthPercent(this.profile);
+  }
+
+  logOut() {
+    logout();
+    this.router.navigate(['/login']);
   }
 
   toggleSave() {

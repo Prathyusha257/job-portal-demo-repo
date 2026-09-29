@@ -1,8 +1,102 @@
 .job-details-page {
+  color: #eef2f7;
+  font-family: Arial, sans-serif;
+}
+
+/* NAVBAR (matches saved-jobs/job-discovery/pipeline for a consistent header) */
+
+.navbar {
+  height: 82px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #202630;
+  background: #090c11;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: #eef2f7;
+}
+
+.logo span {
+  color: #b5ed32;
+}
+
+.nav-links {
+  display: flex;
+  gap: 38px;
+  margin-right: auto;
+  margin-left: 60px;
+}
+
+.nav-links a {
+  color: #858c99;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-links a.active {
+  color: #f1f4f8;
+}
+
+.profile-area {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.profile-status {
+  border: 1px solid #242b35;
+  border-radius: 25px;
+  padding: 11px 18px;
+  color: #858c99;
+  font-size: 14px;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #b5ed32;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.profile-avatar {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #1d2a39;
+  color: #9cc7ef;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-link {
+  color: #858c99;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logout-link:hover {
+  color: #f1f4f8;
+}
+
+/* CONTENT WRAPPER (was previously on .job-details-page directly) */
+
+.job-details-content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 25px 40px 60px;
-  color: #eef2f7;
 }
 
 /* BREADCRUMB */
@@ -374,7 +468,7 @@
 
 @media (max-width: 800px) {
 
-  .job-details-page {
+  .job-details-content {
     padding: 25px 20px 50px;
   }
 

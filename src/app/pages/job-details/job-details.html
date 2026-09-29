@@ -1,5 +1,37 @@
 <div class="job-details-page">
 
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="logo">
+      CareerGrid<span>/</span>
+    </div>
+
+    <div class="nav-links">
+      <a routerLink="/jobs">Discover</a>
+      <a routerLink="/saved-jobs">Saved</a>
+      <a routerLink="/pipeline">Pipeline</a>
+    </div>
+
+    <div class="profile-area">
+
+      <div class="profile-status">
+        <span class="status-dot"></span>
+        Profile {{ profileStrengthPercent }}% complete
+      </div>
+
+      <div class="profile-avatar" routerLink="/profile">
+        {{ initials(profile.name) }}
+      </div>
+
+      <a class="logout-link" (click)="logOut()">Log out</a>
+
+    </div>
+
+  </nav>
+
+  <div class="job-details-content">
+
   <!-- BREADCRUMB -->
   <div class="breadcrumb">
     <a routerLink="/jobs">Discover</a>
@@ -281,6 +313,8 @@
 
 </aside>
 
+
+  </div>
 
   </div>
 
